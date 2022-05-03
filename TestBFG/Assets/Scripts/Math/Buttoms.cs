@@ -32,6 +32,12 @@ public class Buttoms : MonoBehaviour
         {
             str = str.Remove(str.Length - 1);
             txtInput.text = str;
+
+            if (str.Length < 1)
+            {
+                print("hello");
+                str = null;
+            }
         }
     }
 
