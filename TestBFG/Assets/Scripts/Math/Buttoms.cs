@@ -35,7 +35,6 @@ public class Buttoms : MonoBehaviour
 
             if (str.Length < 1)
             {
-                print("hello");
                 str = null;
             }
         }
