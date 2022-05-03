@@ -41,14 +41,20 @@ public class Calculator
                     operStack.Push(input[i]); 
                 else if (input[i] == ')') 
                 {
-                    char s = operStack.Pop();
-
-                    while (s != '(')
+                    try
                     {
-                        output += s.ToString() + ' ';
-                        s = operStack.Pop();
-                    }
+                        char s = operStack.Pop();
 
+                        while (s != '(')
+                        {
+                            output += s.ToString() + ' ';
+                            s = operStack.Pop();
+                        }
+                    }
+                    catch
+                    {
+                        return "Ошибка";
+                    }
                 }
                 else 
                 {
@@ -98,7 +104,7 @@ public class Calculator
                 }
                 catch
                 {
-                    return "Некорректный ввод";
+                    return "Ошибка";
                 }
 
                 switch (input[i]) 
@@ -113,7 +119,8 @@ public class Calculator
                 temp.Push(result); 
             }
         }
-        return temp.Peek().ToString();
+
+        return temp.Count != 0 ? temp.Peek().ToString() : "Ошибка";
     }
 
     static private bool IsDelimeter(char c)

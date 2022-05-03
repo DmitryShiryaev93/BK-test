@@ -11,7 +11,12 @@ public class Buttoms : MonoBehaviour
     [SerializeField]
     private Text txtResult;
     private string str;
-    private bool openCloseBracket = false;
+
+    public void ButtomSign(string c)
+    {
+        str += c;
+        txtInput.text = str;
+    }
 
     public void ButtomNumber(string c)
     {
@@ -24,27 +29,6 @@ public class Buttoms : MonoBehaviour
             str += c;
         }
         txtInput.text = str;
-    }
-
-    public void BackSpace()
-    {
-        if(str != null && str.Length > 0)
-        {
-            str = str.Remove(str.Length - 1);
-            txtInput.text = str;
-
-            if (str.Length < 1)
-            {
-                str = null;
-            }
-        }
-    }
-
-
-    public void Clear()
-    {
-        txtInput.text = "";
-        str = null;
     }
 
     public void Result()
@@ -71,7 +55,7 @@ public class Buttoms : MonoBehaviour
 
     public void CreateBracket()
     {
-        if(str != null && char.IsDigit(str[str.Length-1]))
+        if (str != null && (char.IsDigit(str[str.Length - 1]) || str[str.Length - 1] == ')'))
         {
             str += "*(";
             txtInput.text = str;
@@ -81,23 +65,31 @@ public class Buttoms : MonoBehaviour
             str += "(";
             txtInput.text = str;
         }
-        openCloseBracket = true;
     }
 
     public void CloseBracket()
     {
-        if (openCloseBracket)
-        {
-            str += ")";
-            txtInput.text = str;
-        }
-        openCloseBracket = false;
+        str += ")";
+        txtInput.text = str;
     }
 
-
-    public void ButtomSign(string c)
+    public void BackSpace()
     {
-        str += c;
-        txtInput.text = str;
+        if (str != null && str.Length > 0)
+        {
+            str = str.Remove(str.Length - 1);
+            txtInput.text = str;
+
+            if (str.Length < 1)
+            {
+                str = null;
+            }
+        }
+    }
+
+    public void Clear()
+    {
+        txtInput.text = "";
+        str = null;
     }
 }
